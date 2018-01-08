@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.AutoJump.IOSService"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.AutoJump.Utility", "WeChat.AutoJump.Utility\WeChat.AutoJump.Utility.csproj", "{0FD4B867-F3B8-4798-A795-9AA0D810984A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.AutoJump.WinApp", "WeChat.AutoJump.WinApp\WeChat.AutoJump.WinApp.csproj", "{0D11FF32-8B35-4425-8040-2670C4DF54AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.AutoJump.Domain", "WeChat.AutoJump.Domain\WeChat.AutoJump.Domain.csproj", "{94770A10-2E4E-4FB7-93E0-44728BA493C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{0FD4B867-F3B8-4798-A795-9AA0D810984A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FD4B867-F3B8-4798-A795-9AA0D810984A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FD4B867-F3B8-4798-A795-9AA0D810984A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D11FF32-8B35-4425-8040-2670C4DF54AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D11FF32-8B35-4425-8040-2670C4DF54AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D11FF32-8B35-4425-8040-2670C4DF54AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D11FF32-8B35-4425-8040-2670C4DF54AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94770A10-2E4E-4FB7-93E0-44728BA493C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94770A10-2E4E-4FB7-93E0-44728BA493C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94770A10-2E4E-4FB7-93E0-44728BA493C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94770A10-2E4E-4FB7-93E0-44728BA493C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
