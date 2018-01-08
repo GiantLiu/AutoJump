@@ -99,6 +99,9 @@
     <Content Include="AndoridAdb\AdbWinUsbApi.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Download\panda128X128.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="panda128X128.ico" />
   </ItemGroup>
   <ItemGroup>
