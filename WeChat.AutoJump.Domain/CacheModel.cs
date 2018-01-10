@@ -39,5 +39,9 @@ namespace WeChat.AutoJump.Domain
     {
         public int Width { get; set; }
         public int Height { get; set; }
+        public override string ToString()
+        {
+            return String.Format("Width:{0},Height:{1}", this.Width, this.Height);
+        }
     }
 }
