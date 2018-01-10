@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.AutoJump", "WeChat.AutoJump\WeChat.AutoJump.csproj", "{187BBCA8-9C19-4690-AED7-58897398CBB7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.AutoJump.IService", "WeChat.AutoJump.IService\WeChat.AutoJump.IService.csproj", "{2F9CAAF6-E3AD-43CF-B41B-31CE8F326AEC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.AutoJump.AndroidService", "WeChat.AutoJump.AndroidService\WeChat.AutoJump.AndroidService.csproj", "{27B22951-91FA-42D4-BE3B-59368767C415}"
@@ -25,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{187BBCA8-9C19-4690-AED7-58897398CBB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{187BBCA8-9C19-4690-AED7-58897398CBB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{187BBCA8-9C19-4690-AED7-58897398CBB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{187BBCA8-9C19-4690-AED7-58897398CBB7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2F9CAAF6-E3AD-43CF-B41B-31CE8F326AEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2F9CAAF6-E3AD-43CF-B41B-31CE8F326AEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F9CAAF6-E3AD-43CF-B41B-31CE8F326AEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
