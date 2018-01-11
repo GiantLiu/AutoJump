@@ -6,70 +6,38 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json;
+
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
-using WeChat.AutoJump.Domain;
-using WeChat.AutoJump.IService;
-using WeChat.AutoJump.Utility;
+using Emgu.CV.Util;
 
-namespace WeChat.AutoJump
+namespace WeChat.AutoJump.OpenCVTest
 {
-    public partial class Form1 : Form
+    public partial class Form2 : Form
     {
-        public bool CanAutoJump { get; set; }
-        public IActionService ActionSvc { get; set; }
-        public AutoCacheModel Model { get; set; }
-        
-        private System.Windows.Forms.Timer tm = new System.Windows.Forms.Timer();
-        AutoResetEvent autoEvent = new AutoResetEvent(false);
-
-        public Form1()
+        public Form2()
         {
             InitializeComponent();
-            this.ActionSvc = IocContainer.Resolve<IActionService>();
-            this.Model = new AutoCacheModel();
-            this.CanAutoJump = false;
-            tm.Interval = 3000;
-            tm.Tick += Tm_Tick;
+            ProcessImg();
         }
-
-        private void Tm_Tick(object sender, EventArgs e)
+        public void ProcessImg()
         {
-            autoEvent.Set();
-        }
-
-        private void btnLoad_Click(object sender, EventArgs e)
-        {
-            this.Load();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.ActionSvc.Action(this.Model.Image, this.Model.Time);
-        }
-        private void Load()
-        {
-            var bitImg = this.ActionSvc.GetScreenshots();
-            mainPicBox.Image = bitImg;
-
-            this.Model.Image = new WidthHeight() { Width = bitImg.Width, Height = bitImg.Height };
-
-            Image<Gray, Byte> img = new Image<Gray, byte>(bitImg);
-            Image<Gray, Byte> sourceImg = new Image<Gray, byte>(bitImg);
+            var imgDic = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
+            var curImgPath = Path.Combine(imgDic, "20180111175018734.png");
+            Image<Rgb, Byte> img = new Image<Rgb, Byte>(curImgPath);
+            Image<Rgb, Byte> sourceImg = new Image<Rgb, Byte>(curImgPath);
 
             //原图宽的1/2
             var imgWidthCenter = (int)(img.Width / 2.0);
             //原图高的1/3
             var imgHeightSplit = (int)(img.Height / 3.0);
 
-            var tempGrayPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Template", "Gray.png");
+            var tempGrayPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Template", "Current.png");
 
-            var tempGrayImg = new Image<Gray, byte>(tempGrayPath);
+            var tempGrayImg = new Image<Rgb, byte>(tempGrayPath);
 
             var match = img.MatchTemplate(tempGrayImg, TemplateMatchingType.CcorrNormed);
 
@@ -82,10 +50,10 @@ namespace WeChat.AutoJump
 
             var startPoint = new Point();
             startPoint.X = maxp.X + (int)(tempGrayImg.Width / 2.0);
-            startPoint.Y = maxp.Y + tempGrayImg.Height - 20;
+            startPoint.Y = maxp.Y + tempGrayImg.Height - 2;
             CvInvoke.Rectangle(img, new Rectangle(startPoint, new Size(1, 1)), new MCvScalar(0, 0, 0), 3);
 
-            picBox1.Image = img.ToBitmap();
+            mainImg.Image = img;
             //裁剪查找区域
             //原图片1/3以下，小黑人以上
             var newImgStart = imgHeightSplit;
@@ -94,10 +62,10 @@ namespace WeChat.AutoJump
             Rectangle rect = new Rectangle(0, newImgStart, img.Width, newImgHeight);
 
             CvInvoke.cvSetImageROI(sourceImg, rect);
-            var newImg = new Image<Gray, byte>(sourceImg.Width, newImgHeight);
+            var newImg = new Image<Rgb, byte>(sourceImg.Width, newImgHeight);
             CvInvoke.cvCopy(sourceImg, newImg, IntPtr.Zero);
 
-            picBox2.Image = newImg.ToBitmap();
+            imgBox1.Image = newImg;
 
             //看小黑人在程序的左边还是右边
             //如果在左边，那目标点就在图片的右边
@@ -111,10 +79,10 @@ namespace WeChat.AutoJump
                 halfRect = new Rectangle(imgWidthCenter, 0, imgWidthCenter, newImgHeight);
 
             CvInvoke.cvSetImageROI(newImg, halfRect);
-            var halfImg = new Image<Gray, byte>(imgWidthCenter, newImgHeight);
+            var halfImg = new Image<Rgb, byte>(imgWidthCenter, newImgHeight);
             CvInvoke.cvCopy(newImg, halfImg, IntPtr.Zero);
 
-            picBox3.Image = halfImg.ToBitmap();
+            imgBox2.Image = halfImg;
             Point topPoint = new Point();
             for (int i = 0; i < halfImg.Rows; i++)
             {
@@ -122,11 +90,11 @@ namespace WeChat.AutoJump
                 {
                     var cur = halfImg[i, j];
                     var next = halfImg[i, j + 1];
-                    if (Math.Abs(cur.Intensity - next.Intensity) > 2)
+                    if (Math.Abs(RgbHelp.GetDiff(cur, next)) > 2)
                     {
                         var x = 2;
                         next = halfImg[i, j + x];
-                        while (Math.Abs(cur.Intensity - next.Intensity) > 2)
+                        while (Math.Abs(RgbHelp.GetDiff(cur, next)) > 2)
                         {
                             x++;
                             next = halfImg[i, j + x];
@@ -151,44 +119,18 @@ namespace WeChat.AutoJump
             var nodePoint1 = new Point(oldTopX, startPoint.Y);
             CvInvoke.Line(img, oldTopPoint, nodePoint1, new MCvScalar(0, 0, 255), 3);
             CvInvoke.Line(img, startPoint, nodePoint1, new MCvScalar(0, 0, 255), 3);
-            this.Model.Top = oldTopPoint;
-            this.Model.Start = startPoint;
-            this.txtMsg.Text = JsonConvert.SerializeObject(this.Model);
+            var lineWidth = Math.Abs(oldTopX - startPoint.X);
+            var jumpWidth = lineWidth / Math.Cos(30);
         }
-
-        private void button2_Click(object sender, EventArgs e)
+    }
+    public static class RgbHelp
+    {
+        public static double GetDiff(Rgb one, Rgb two)
         {
-            this.CanAutoJump = true;
-            
-            tm.Start();
-            Thread t = new Thread(DoWork);
-            t.Start();
-        }
-
-        private void DoWork()
-        {
-            Auto();
-        }
-
-        private void Auto()
-        {
-            while (this.CanAutoJump)
-            {
-                autoEvent.WaitOne();
-                this.Invoke(new Action(() =>
-                {
-                    this.Load();
-                    this.ActionSvc.Action(this.Model.Image, this.Model.Time);
-                    //Thread.Sleep(this.Model.Time + 1000);
-                }));
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            this.CanAutoJump = false;
-
-            tm.Stop();
+            var diffR = one.Red - two.Red;
+            var diffG = one.Green - two.Green;
+            var diffB = one.Blue - two.Blue;
+            return diffR + diffG + diffB;
         }
     }
 }

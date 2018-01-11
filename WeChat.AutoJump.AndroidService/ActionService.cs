@@ -7,20 +7,35 @@ using System.IO;
 using System.Threading.Tasks;
 using WeChat.AutoJump.IService;
 using System.Diagnostics;
+using WeChat.AutoJump.Domain;
 
 namespace WeChat.AutoJump.AndroidService
 {
     public class ActionService : IActionService
     {
-        public void Action(int time)
+        public Random Rand { get; set; }
+        public ActionService()
+        {
+            this.Rand = new Random();
+        }
+        public void Action(WidthHeight img, int time)
         {
             var adbDirectoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "AndoridAdb");
             var adbPath = Path.Combine(adbDirectoryPath, "adb.exe");
+
+            var point1 = new Point();
+            point1.X = this.Rand.Next(100, img.Width - 200);
+            point1.Y = this.Rand.Next(100, img.Height - 300);
+
+            var point2 = new Point();
+            point2.X = this.Rand.Next(100, img.Width - 200);
+            point2.Y = this.Rand.Next(100, img.Height - 300);
+
             using (Process process = new Process())
             {
                 //process.StartInfo.WorkingDirectory = adbDirectoryPath;
                 process.StartInfo.FileName = adbPath;
-                process.StartInfo.Arguments = String.Format("shell input swipe 100 100 200 200 {0}", time);
+                process.StartInfo.Arguments = String.Format("shell input swipe {0} {1} {2} {3} {4}", point1.X, point1.Y, point2.X, point2.Y, time);
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardInput = true;   //重定向标准输入   
                 process.StartInfo.RedirectStandardOutput = true;  //重定向标准输出   

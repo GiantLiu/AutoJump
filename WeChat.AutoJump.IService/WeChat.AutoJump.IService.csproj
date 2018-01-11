@@ -44,6 +44,12 @@
     <Compile Include="IActionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WeChat.AutoJump.Domain\WeChat.AutoJump.Domain.csproj">
+      <Project>{94770A10-2E4E-4FB7-93E0-44728BA493C9}</Project>
+      <Name>WeChat.AutoJump.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

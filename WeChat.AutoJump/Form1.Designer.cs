@@ -28,27 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.mainImgBox = new Emgu.CV.UI.ImageBox();
             this.mainPicBox = new System.Windows.Forms.PictureBox();
-            this.imgBox1 = new Emgu.CV.UI.ImageBox();
-            this.imgBox2 = new Emgu.CV.UI.ImageBox();
             this.btnLoad = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.txtMsg = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.mainImgBox)).BeginInit();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.picBox1 = new System.Windows.Forms.PictureBox();
+            this.picBox2 = new System.Windows.Forms.PictureBox();
+            this.picBox3 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.mainPicBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox3)).BeginInit();
             this.SuspendLayout();
-            // 
-            // mainImgBox
-            // 
-            this.mainImgBox.Location = new System.Drawing.Point(355, 12);
-            this.mainImgBox.Name = "mainImgBox";
-            this.mainImgBox.Size = new System.Drawing.Size(375, 667);
-            this.mainImgBox.TabIndex = 2;
-            this.mainImgBox.TabStop = false;
             // 
             // mainPicBox
             // 
@@ -59,25 +52,9 @@
             this.mainPicBox.TabIndex = 3;
             this.mainPicBox.TabStop = false;
             // 
-            // imgBox1
-            // 
-            this.imgBox1.Location = new System.Drawing.Point(736, 12);
-            this.imgBox1.Name = "imgBox1";
-            this.imgBox1.Size = new System.Drawing.Size(337, 333);
-            this.imgBox1.TabIndex = 2;
-            this.imgBox1.TabStop = false;
-            // 
-            // imgBox2
-            // 
-            this.imgBox2.Location = new System.Drawing.Point(736, 352);
-            this.imgBox2.Name = "imgBox2";
-            this.imgBox2.Size = new System.Drawing.Size(337, 333);
-            this.imgBox2.TabIndex = 4;
-            this.imgBox2.TabStop = false;
-            // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(1079, 12);
+            this.btnLoad.Location = new System.Drawing.Point(1041, 14);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(75, 23);
             this.btnLoad.TabIndex = 5;
@@ -87,7 +64,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1079, 124);
+            this.button1.Location = new System.Drawing.Point(1041, 43);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 7;
@@ -97,44 +74,91 @@
             // 
             // txtMsg
             // 
-            this.txtMsg.Location = new System.Drawing.Point(1079, 189);
+            this.txtMsg.Location = new System.Drawing.Point(1042, 131);
             this.txtMsg.Multiline = true;
             this.txtMsg.Name = "txtMsg";
             this.txtMsg.Size = new System.Drawing.Size(193, 490);
             this.txtMsg.TabIndex = 8;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1041, 72);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "自动跳";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(1042, 102);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 10;
+            this.button3.Text = "停止";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // picBox1
+            // 
+            this.picBox1.Location = new System.Drawing.Point(355, 14);
+            this.picBox1.Name = "picBox1";
+            this.picBox1.Size = new System.Drawing.Size(337, 667);
+            this.picBox1.TabIndex = 11;
+            this.picBox1.TabStop = false;
+            // 
+            // picBox2
+            // 
+            this.picBox2.Location = new System.Drawing.Point(698, 14);
+            this.picBox2.Name = "picBox2";
+            this.picBox2.Size = new System.Drawing.Size(337, 300);
+            this.picBox2.TabIndex = 12;
+            this.picBox2.TabStop = false;
+            // 
+            // picBox3
+            // 
+            this.picBox3.Location = new System.Drawing.Point(698, 320);
+            this.picBox3.Name = "picBox3";
+            this.picBox3.Size = new System.Drawing.Size(337, 300);
+            this.picBox3.TabIndex = 13;
+            this.picBox3.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 697);
+            this.ClientSize = new System.Drawing.Size(1247, 697);
+            this.Controls.Add(this.picBox3);
+            this.Controls.Add(this.picBox2);
+            this.Controls.Add(this.picBox1);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.txtMsg);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnLoad);
-            this.Controls.Add(this.imgBox2);
-            this.Controls.Add(this.imgBox1);
             this.Controls.Add(this.mainPicBox);
-            this.Controls.Add(this.mainImgBox);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.mainImgBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainPicBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private Emgu.CV.UI.ImageBox mainImgBox;
         private System.Windows.Forms.PictureBox mainPicBox;
-        private Emgu.CV.UI.ImageBox imgBox1;
-        private Emgu.CV.UI.ImageBox imgBox2;
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtMsg;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.PictureBox picBox1;
+        private System.Windows.Forms.PictureBox picBox2;
+        private System.Windows.Forms.PictureBox picBox3;
     }
 }
 

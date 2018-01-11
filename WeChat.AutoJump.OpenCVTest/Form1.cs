@@ -26,8 +26,9 @@ namespace WeChat.AutoJump.OpenCVTest
         public void ProcessImg()
         {
             var imgDic = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
-            var curImgPath = Path.Combine(imgDic, "20180109094721127.png");
+            var curImgPath = Path.Combine(imgDic, "20180111100330166.png");
             Image<Gray, Byte> img = new Image<Gray, byte>(curImgPath);
+            Image<Gray, Byte> sourceImg = new Image<Gray, byte>(curImgPath);
 
             //原图宽的1/2
             var imgWidthCenter = (int)(img.Width / 2.0);
@@ -60,27 +61,11 @@ namespace WeChat.AutoJump.OpenCVTest
             var newImgHeight = newImgEnd - newImgStart;
             Rectangle rect = new Rectangle(0, newImgStart, img.Width, newImgHeight);
 
-            CvInvoke.cvSetImageROI(img, rect);
-            var newImg = new Image<Gray, byte>(img.Width, newImgHeight);
-            CvInvoke.cvCopy(img, newImg, IntPtr.Zero);
+            CvInvoke.cvSetImageROI(sourceImg, rect);
+            var newImg = new Image<Gray, byte>(sourceImg.Width, newImgHeight);
+            CvInvoke.cvCopy(sourceImg, newImg, IntPtr.Zero);
 
             imgBox1.Image = newImg;
-            //var newImg = grayImg.CopyBlank();
-            //var rows = grayImg.Rows;
-            //var cols = grayImg.Cols;
-            //for (int i = 0; i < rows; i++)
-            //{
-            //    for (int j = 0; j < cols - 1; j++)
-            //    {
-            //        var cur = grayImg[i, j];
-            //        var next = grayImg[i, j + 1];
-            //        if (Math.Abs(cur.Intensity - next.Intensity) <= 1)
-            //            newImg[i, j] = new Gray(255);
-            //        else
-            //            newImg[i, j] = new Gray(0);
-            //    }
-            //    newImg[i, cols - 1] = new Gray(255);
-            //}
 
             //看小黑人在程序的左边还是右边
             //如果在左边，那目标点就在图片的右边

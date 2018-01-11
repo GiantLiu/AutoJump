@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using WeChat.AutoJump.Domain;
 
 namespace WeChat.AutoJump.IService
 {
@@ -20,6 +20,6 @@ namespace WeChat.AutoJump.IService
         /// 发送按压命令
         /// </summary>
         /// <param name="time">按住屏幕时间（毫秒）</param>
-        void Action(int time);
+        void Action(WidthHeight img, int time);
     }
 }

@@ -7,12 +7,13 @@ using System.IO;
 using System.Threading.Tasks;
 using WeChat.AutoJump.IService;
 using System.Diagnostics;
+using WeChat.AutoJump.Domain;
 
 namespace WeChat.AutoJump.IOSService
 {
     public class ActionService : IActionService
     {
-        public void Action(int time)
+        public void Action(WidthHeight img, int time)
         {
             throw new NotImplementedException();
         }

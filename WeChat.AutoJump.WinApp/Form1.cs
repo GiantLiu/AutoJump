@@ -43,7 +43,7 @@ namespace WeChat.AutoJump.WinApp
                     {
                         this.Model.End = e.Location;
                         var time = this.Model.GetTime();
-                        this.ActionSvc.Action(time);
+                        this.ActionSvc.Action(this.Model.Image, time);
                         this.Model = new CacheModel();
                         Thread.Sleep(time + 1000);
                         this.SetImg();

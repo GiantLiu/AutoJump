@@ -45,6 +45,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WeChat.AutoJump.Domain\WeChat.AutoJump.Domain.csproj">
+      <Project>{94770A10-2E4E-4FB7-93E0-44728BA493C9}</Project>
+      <Name>WeChat.AutoJump.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WeChat.AutoJump.IService\WeChat.AutoJump.IService.csproj">
       <Project>{2f9caaf6-e3ad-43cf-b41b-31ce8f326aec}</Project>
       <Name>WeChat.AutoJump.IService</Name>

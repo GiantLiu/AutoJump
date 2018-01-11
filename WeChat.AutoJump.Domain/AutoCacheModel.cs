@@ -25,18 +25,9 @@ namespace WeChat.AutoJump.Domain
         {
             get
             {
-                var constVal = 1495 / (this.Image.Width + 0.00);
+                var constVal = 1490 / (this.Image.Width + 0.00);
                 return (int)(this.JumpWidth * constVal);
             }
-        }
-        public override string ToString()
-        {
-            return String.Format("Image:{0}\r\nTop:X:{1},Y:{2}\r\nStart:X:{3},Y:{4}\r\nJumpWidth:{5},Time:{6}",
-                this.Image.ToString(),
-                this.Top.X, this.Top.Y,
-                this.Start.X, this.Start.Y,
-                this.JumpWidth,
-                this.Time);
         }
     }
 }
