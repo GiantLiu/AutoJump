@@ -28,7 +28,7 @@ namespace WeChat.AutoJump.OpenCVTest
         public void ProcessImg()
         {
             var imgDic = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
-            var curImgPath = Path.Combine(imgDic, "20180111110416564.png");
+            var curImgPath = Path.Combine(imgDic, "20180112161249906.png");
             var tesssdataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory);
             Image<Bgr, Byte> img = new Image<Bgr, Byte>(curImgPath);
 
@@ -49,12 +49,13 @@ namespace WeChat.AutoJump.OpenCVTest
 
             imgBox1.Image = newImg;
 
-            var thresImg = newImg.ThresholdBinary(new Gray(77), new Gray(255));
-            imgBox2.Image = thresImg;
+            //var thresImg = newImg.ThresholdBinary(new Gray(77), new Gray(255));
+            //imgBox2.Image = thresImg;
 
-            
-            Tesseract ocr = new Tesseract("", "eng", OcrEngineMode.TesseractLstmCombined);
-            ocr.SetImage(thresImg);
+            Tesseract ocr = new Tesseract("", "eng", OcrEngineMode.TesseractLstmCombined, "0123456789");
+            ocr.SetImage(newImg);
+            ocr.SetVariable("tessedit_char_whitelist", "0123456789");
+            var rr = ocr.Recognize();
             var val = ocr.GetUTF8Text();
         }
     }
