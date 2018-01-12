@@ -26,7 +26,7 @@ namespace WeChat.AutoJump.OpenCVTest
         public void ProcessImg()
         {
             var imgDic = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
-            var curImgPath = Path.Combine(imgDic, "20180111175018734.png");
+            var curImgPath = Path.Combine(imgDic, "20180111172504771.png");
             Image<Rgb, Byte> img = new Image<Rgb, Byte>(curImgPath);
             Image<Rgb, Byte> sourceImg = new Image<Rgb, Byte>(curImgPath);
 
@@ -53,7 +53,7 @@ namespace WeChat.AutoJump.OpenCVTest
             startPoint.Y = maxp.Y + tempGrayImg.Height - 2;
             CvInvoke.Rectangle(img, new Rectangle(startPoint, new Size(1, 1)), new MCvScalar(0, 0, 0), 3);
 
-            mainImg.Image = img;
+            
             //裁剪查找区域
             //原图片1/3以下，小黑人以上
             var newImgStart = imgHeightSplit;
@@ -65,7 +65,7 @@ namespace WeChat.AutoJump.OpenCVTest
             var newImg = new Image<Rgb, byte>(sourceImg.Width, newImgHeight);
             CvInvoke.cvCopy(sourceImg, newImg, IntPtr.Zero);
 
-            imgBox1.Image = newImg;
+            
 
             //看小黑人在程序的左边还是右边
             //如果在左边，那目标点就在图片的右边
@@ -82,7 +82,7 @@ namespace WeChat.AutoJump.OpenCVTest
             var halfImg = new Image<Rgb, byte>(imgWidthCenter, newImgHeight);
             CvInvoke.cvCopy(newImg, halfImg, IntPtr.Zero);
 
-            imgBox2.Image = halfImg;
+            
             Point topPoint = new Point();
             for (int i = 0; i < halfImg.Rows; i++)
             {
@@ -115,12 +115,17 @@ namespace WeChat.AutoJump.OpenCVTest
             var oldTopPoint = new Point(oldTopX, oldTopY);
             CvInvoke.Rectangle(img, new Rectangle(oldTopPoint, new Size(1, 1)), new MCvScalar(0, 0, 255), 3);
 
-
+            //画线
             var nodePoint1 = new Point(oldTopX, startPoint.Y);
             CvInvoke.Line(img, oldTopPoint, nodePoint1, new MCvScalar(0, 0, 255), 3);
             CvInvoke.Line(img, startPoint, nodePoint1, new MCvScalar(0, 0, 255), 3);
             var lineWidth = Math.Abs(oldTopX - startPoint.X);
             var jumpWidth = lineWidth / Math.Cos(30);
+
+
+            mainImg.Image = img;
+            imgBox1.Image = newImg;
+            imgBox2.Image = halfImg;
         }
     }
     public static class RgbHelp

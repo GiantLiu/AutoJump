@@ -50,7 +50,7 @@ namespace WeChat.AutoJump.CMDApp
 
                 var startPoint = new Point();
                 startPoint.X = maxp.X + (int)(tempGrayImg.Width / 2.0);
-                startPoint.Y = maxp.Y + tempGrayImg.Height - 2;
+                startPoint.Y = maxp.Y + tempGrayImg.Height - 20;
                 
                 //裁剪查找区域
                 //原图片1/3以下，小黑人以上
@@ -107,11 +107,7 @@ namespace WeChat.AutoJump.CMDApp
                 if (!targetInLeft) oldTopX += imgWidthCenter;
                 var oldTopY = topPoint.Y + imgHeightSplit;
                 var oldTopPoint = new Point(oldTopX, oldTopY);
-
-
-                var nodePoint1 = new Point(oldTopX, startPoint.Y);
-                CvInvoke.Line(img, oldTopPoint, nodePoint1, new MCvScalar(0, 0, 255), 3);
-                CvInvoke.Line(img, startPoint, nodePoint1, new MCvScalar(0, 0, 255), 3);
+                
                 Model.Top = oldTopPoint;
                 Model.Start = startPoint;
                 Console.WriteLine(JsonConvert.SerializeObject(Model));

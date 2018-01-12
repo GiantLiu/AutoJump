@@ -33,10 +33,12 @@
             this.imgBox1 = new Emgu.CV.UI.ImageBox();
             this.imgBox2 = new Emgu.CV.UI.ImageBox();
             this.imgBox3 = new Emgu.CV.UI.ImageBox();
+            this.imgBox4 = new Emgu.CV.UI.ImageBox();
             ((System.ComponentModel.ISupportInitialize)(this.mainImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // mainImg
@@ -66,27 +68,37 @@
             // 
             // imgBox3
             // 
-            this.imgBox3.Location = new System.Drawing.Point(775, 13);
+            this.imgBox3.Location = new System.Drawing.Point(775, 12);
             this.imgBox3.Name = "imgBox3";
-            this.imgBox3.Size = new System.Drawing.Size(375, 667);
+            this.imgBox3.Size = new System.Drawing.Size(375, 333);
             this.imgBox3.TabIndex = 4;
             this.imgBox3.TabStop = false;
             // 
-            // Form1
+            // imgBox4
+            // 
+            this.imgBox4.Location = new System.Drawing.Point(775, 352);
+            this.imgBox4.Name = "imgBox4";
+            this.imgBox4.Size = new System.Drawing.Size(375, 333);
+            this.imgBox4.TabIndex = 5;
+            this.imgBox4.TabStop = false;
+            // 
+            // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1172, 711);
+            this.Controls.Add(this.imgBox4);
             this.Controls.Add(this.imgBox3);
             this.Controls.Add(this.imgBox2);
             this.Controls.Add(this.imgBox1);
             this.Controls.Add(this.mainImg);
-            this.Name = "Form1";
+            this.Name = "Form2";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.mainImg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgBox4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -97,6 +109,7 @@
         private Emgu.CV.UI.ImageBox imgBox1;
         private Emgu.CV.UI.ImageBox imgBox2;
         private Emgu.CV.UI.ImageBox imgBox3;
+        private Emgu.CV.UI.ImageBox imgBox4;
     }
 }
 
