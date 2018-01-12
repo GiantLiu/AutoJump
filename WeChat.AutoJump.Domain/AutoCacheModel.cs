@@ -25,7 +25,7 @@ namespace WeChat.AutoJump.Domain
         {
             get
             {
-                var constVal = 1490 / (this.Image.Width + 0.00);
+                var constVal = double.Parse(AppSettingHelper.Get("ConstValue"));
                 return (int)(this.JumpWidth * constVal);
             }
         }

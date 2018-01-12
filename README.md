@@ -25,6 +25,8 @@ WeChat.AutoJump.WinApp
 2.在用此版本的程序前，要先打开手机“开发者选项”
 
 3.在“开发都选项”里面，打开"USB调试"
+4.如果发现跳远/近了。可以修改程序config文件里的系数
+<add key="ConstValue" value="1.37" />
 
 
 接口定义

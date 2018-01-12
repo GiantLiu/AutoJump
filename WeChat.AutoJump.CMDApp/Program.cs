@@ -120,6 +120,14 @@ namespace WeChat.AutoJump.CMDApp
                 Model.Start = startPoint;
                 Console.WriteLine(JsonConvert.SerializeObject(Model));
                 ActionSvc.Action(Model.Image, Model.Time);
+
+                bitImg.Dispose();
+                img.Dispose();
+                sourceImg.Dispose();
+                match.Dispose();
+                newImg.Dispose();
+                halfImg.Dispose();
+
                 Thread.Sleep(Model.Time + rand.Next(600, 1000));
             }
         }

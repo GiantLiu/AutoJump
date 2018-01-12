@@ -24,7 +24,7 @@ namespace WeChat.AutoJump.Domain
             imgEnd.X = (int)(this.End.X * this.Zoom);
             imgEnd.Y = (int)(this.End.Y * this.Zoom);
             double value = Math.Sqrt(Math.Abs(imgStart.X - imgEnd.X) * Math.Abs(imgStart.X - imgEnd.X) + Math.Abs(imgStart.Y - imgEnd.Y) * Math.Abs(imgStart.Y - imgEnd.Y));
-            var constVal = 1495 / (this.Image.Width + 0.00);
+            var constVal = double.Parse(AppSettingHelper.Get("ConstValue"));
             return (int)(value * constVal);
         }
         public double Zoom
