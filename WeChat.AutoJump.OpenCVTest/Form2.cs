@@ -53,9 +53,9 @@ namespace WeChat.AutoJump.OpenCVTest
             startPoint.Y = maxp.Y + tempGrayImg.Height - 2;
             CvInvoke.Rectangle(img, new Rectangle(startPoint, new Size(1, 1)), new MCvScalar(0, 0, 0), 3);
 
-            
-            //裁剪查找区域
-            //原图片1/3以下，小黑人以上
+
+            ////裁剪查找区域
+            ////原图片1/3以下，小黑人以上
             var newImgStart = imgHeightSplit;
             var newImgEnd = maxp.Y + tempGrayImg.Height;
             var newImgHeight = newImgEnd - newImgStart;
@@ -65,10 +65,10 @@ namespace WeChat.AutoJump.OpenCVTest
             var newImg = new Image<Rgb, byte>(sourceImg.Width, newImgHeight);
             CvInvoke.cvCopy(sourceImg, newImg, IntPtr.Zero);
 
-            
 
-            //看小黑人在程序的左边还是右边
-            //如果在左边，那目标点就在图片的右边
+
+            ////看小黑人在程序的左边还是右边
+            ////如果在左边，那目标点就在图片的右边
             bool targetInLeft = true;
             if (maxp.X < imgWidthCenter) targetInLeft = false;
 
@@ -82,7 +82,7 @@ namespace WeChat.AutoJump.OpenCVTest
             var halfImg = new Image<Rgb, byte>(imgWidthCenter, newImgHeight);
             CvInvoke.cvCopy(newImg, halfImg, IntPtr.Zero);
 
-            
+
             Point topPoint = new Point();
             for (int i = 0; i < halfImg.Rows; i++)
             {
@@ -108,19 +108,19 @@ namespace WeChat.AutoJump.OpenCVTest
             }
             CvInvoke.Rectangle(halfImg, new Rectangle(topPoint, new Size(1, 1)), new MCvScalar(0, 0, 255), 3);
 
-            //这个顶点在原图中的位置
+            ////这个顶点在原图中的位置
             var oldTopX = topPoint.X;
             if (!targetInLeft) oldTopX += imgWidthCenter;
             var oldTopY = topPoint.Y + imgHeightSplit;
             var oldTopPoint = new Point(oldTopX, oldTopY);
             CvInvoke.Rectangle(img, new Rectangle(oldTopPoint, new Size(1, 1)), new MCvScalar(0, 0, 255), 3);
 
-            //画线
-            var nodePoint1 = new Point(oldTopX, startPoint.Y);
-            CvInvoke.Line(img, oldTopPoint, nodePoint1, new MCvScalar(0, 0, 255), 3);
-            CvInvoke.Line(img, startPoint, nodePoint1, new MCvScalar(0, 0, 255), 3);
-            var lineWidth = Math.Abs(oldTopX - startPoint.X);
-            var jumpWidth = lineWidth / Math.Cos(30);
+            ////画线
+            //var nodePoint1 = new Point(oldTopX, startPoint.Y);
+            //CvInvoke.Line(img, oldTopPoint, nodePoint1, new MCvScalar(0, 0, 255), 3);
+            //CvInvoke.Line(img, startPoint, nodePoint1, new MCvScalar(0, 0, 255), 3);
+            //var lineWidth = Math.Abs(oldTopX - startPoint.X);
+            //var jumpWidth = lineWidth / Math.Cos(30);
 
 
             mainImg.Image = img;

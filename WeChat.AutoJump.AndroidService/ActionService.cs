@@ -108,5 +108,15 @@ namespace WeChat.AutoJump.AndroidService
                 return result;
             }
         }
+
+        public string GetDeciveID()
+        {
+            var devicesArg = "devices";
+            var result = AdbCommand(devicesArg);
+            var lineArray = result.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            if (lineArray.Length <= 1) return null;
+            var deviceInfo = lineArray[1].Split(new string[] { " ", "\t" }, StringSplitOptions.RemoveEmptyEntries);
+            return deviceInfo[0];
+        }
     }
 }

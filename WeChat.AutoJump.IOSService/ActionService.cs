@@ -18,6 +18,11 @@ namespace WeChat.AutoJump.IOSService
             throw new NotImplementedException();
         }
 
+        public string GetDeciveID()
+        {
+            throw new NotImplementedException();
+        }
+
         public Bitmap GetScreenshots()
         {
             throw new NotImplementedException();

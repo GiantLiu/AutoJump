@@ -21,6 +21,14 @@ namespace WeChat.AutoJump.CMDApp
         static void Main(string[] args)
         {
             var ActionSvc = IocContainer.Resolve<IActionService>();
+            var deviceID = ActionSvc.GetDeciveID();
+            if (String.IsNullOrEmpty(deviceID))
+            {
+                Console.WriteLine("当前没有检测到手机");
+                Console.WriteLine("请在手机 设置->开发者选项->打开开发都选项和USB调试 后继续运行此程序");
+                Console.ReadKey();
+                return;
+            }
             var Model = new AutoCacheModel();
             var rand = new Random();
             while(true)

@@ -27,7 +27,9 @@ namespace WeChat.AutoJump.WinApp
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            this.SetImg();
+            var deviceInfo = this.ActionSvc.GetDeciveID();
+            if (String.IsNullOrEmpty(deviceInfo)) MessageBox.Show("当前没有检测到手机");
+            else this.SetImg();
         }
 
         private void mainImg_MouseClick(object sender, MouseEventArgs e)
