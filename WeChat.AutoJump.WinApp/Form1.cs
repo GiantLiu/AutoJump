@@ -28,7 +28,7 @@ namespace WeChat.AutoJump.WinApp
         private void btnStart_Click(object sender, EventArgs e)
         {
             var deviceInfo = this.ActionSvc.GetDeciveID();
-            if (String.IsNullOrEmpty(deviceInfo)) MessageBox.Show("当前没有检测到手机");
+            if (String.IsNullOrEmpty(deviceInfo)) MessageBox.Show("当前没有检测到手机\r\n请在手机 设置->开发者选项->打开开发都选项和USB调试 后继续运行此程序");
             else this.SetImg();
         }
 
