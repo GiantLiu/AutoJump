@@ -12,6 +12,7 @@ namespace WeChat.AutoJump.Domain
         public WidthHeight Image { get; set; }
         public Point Top { get; set; }
         public Point Start { get; set; }
+        public int Score { get; set; }
         public double JumpWidth
         {
             get

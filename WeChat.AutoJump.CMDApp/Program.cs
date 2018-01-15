@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
+using Emgu.CV.OCR;
 using Newtonsoft.Json;
 using WeChat.AutoJump.Domain;
 using WeChat.AutoJump.IService;
@@ -29,6 +30,11 @@ namespace WeChat.AutoJump.CMDApp
                 Console.ReadKey();
                 return;
             }
+            var targetScore = 100;
+            Console.WriteLine("请输入您希望跳的目标分数（当达到此分数后，程序自动停止）");
+            var inputScore = Console.ReadLine();
+            targetScore = int.Parse(inputScore);
+
             var Model = new AutoCacheModel();
             var rand = new Random();
             while(true)
@@ -38,12 +44,39 @@ namespace WeChat.AutoJump.CMDApp
                 Model.Image = new WidthHeight() { Width = bitImg.Width, Height = bitImg.Height };
 
                 Image<Rgb, Byte> img = new Image<Rgb, Byte>(bitImg);
-                Image<Rgb, Byte> sourceImg = new Image<Rgb, byte>(bitImg);
+                Image<Rgb, Byte> sourceImg = new Image<Rgb, Byte>(bitImg);
 
                 //原图宽的1/2
                 var imgWidthCenter = (int)(img.Width / 2.0);
+                //原图宽的1/3
+                var imgWidthSplit = (int)(img.Width / 3.0);
                 //原图高的1/3
                 var imgHeightSplit = (int)(img.Height / 3.0);
+
+                //成绩识别
+                var sourceGrayImg = sourceImg.Convert<Gray, Byte>();
+                Rectangle rectScore = new Rectangle(0, 0, imgWidthSplit * 2, imgHeightSplit);
+                CvInvoke.cvSetImageROI(sourceGrayImg, rectScore);
+                var scoreImg = new Image<Gray, Byte>(imgWidthSplit * 2, imgHeightSplit);
+                CvInvoke.cvCopy(sourceGrayImg, scoreImg, IntPtr.Zero);
+                var thresImg = scoreImg.ThresholdBinary(new Gray(78), new Gray(255));
+                //thresImg.ToBitmap().Save(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DownLoad", DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".png"));
+                Tesseract ocr = new Tesseract("", "num", OcrEngineMode.TesseractLstmCombined, "0123456789");
+                ocr.SetImage(thresImg);
+                ocr.SetVariable("tessedit_char_whitelist", "0123456789");
+                if (ocr.Recognize() == 0)
+                {
+                    var val = ocr.GetUTF8Text();
+                    val = val.Trim().Replace(" ", "");
+                    if (!String.IsNullOrEmpty(val))
+                    {
+                        int score = Model.Score;
+                        var canParse = int.TryParse(val, out score);
+                        if (canParse && score > Model.Score) Model.Score = score;
+                    }
+                }
+
+                if (Model.Score >= targetScore) break;
 
                 var tempGrayPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Template", "Current.png");
 

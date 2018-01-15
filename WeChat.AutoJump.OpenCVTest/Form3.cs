@@ -28,7 +28,7 @@ namespace WeChat.AutoJump.OpenCVTest
         public void ProcessImg()
         {
             var imgDic = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
-            var curImgPath = Path.Combine(imgDic, "20180112161249906.png");
+            var curImgPath = Path.Combine(imgDic, "20180109093048226.png");
             var tesssdataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory);
             Image<Bgr, Byte> img = new Image<Bgr, Byte>(curImgPath);
 
@@ -42,21 +42,22 @@ namespace WeChat.AutoJump.OpenCVTest
             mainImg.Image = grayImg;
 
             Rectangle rect = new Rectangle(0, 0, imgWidthSplit * 2, imgHeightSplit);
-
             CvInvoke.cvSetImageROI(grayImg, rect);
             var newImg = new Image<Gray, Byte>(imgWidthSplit * 2, imgHeightSplit);
             CvInvoke.cvCopy(grayImg, newImg, IntPtr.Zero);
 
             imgBox1.Image = newImg;
 
-            //var thresImg = newImg.ThresholdBinary(new Gray(77), new Gray(255));
-            //imgBox2.Image = thresImg;
+            var thresImg = newImg.ThresholdBinary(new Gray(78), new Gray(255));
+           
+            imgBox2.Image = thresImg;
 
-            Tesseract ocr = new Tesseract("", "eng", OcrEngineMode.TesseractLstmCombined, "0123456789");
-            ocr.SetImage(newImg);
+            Tesseract ocr = new Tesseract("", "num", OcrEngineMode.TesseractOnly);
+            ocr.SetImage(thresImg);
             ocr.SetVariable("tessedit_char_whitelist", "0123456789");
             var rr = ocr.Recognize();
             var val = ocr.GetUTF8Text();
+            MessageBox.Show(val);
         }
     }
 }
