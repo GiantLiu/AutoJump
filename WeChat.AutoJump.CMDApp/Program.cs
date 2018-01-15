@@ -31,6 +31,7 @@ namespace WeChat.AutoJump.CMDApp
                 return;
             }
             var targetScore = 100;
+            Console.WriteLine("如果累积误差比较大，请停止此程序。可以运行半自动版本消除误差后再重新运行此版本");
             Console.WriteLine("请输入您希望跳的目标分数（当达到此分数后，程序自动停止）");
             var inputScore = Console.ReadLine();
             targetScore = int.Parse(inputScore);
@@ -79,9 +80,7 @@ namespace WeChat.AutoJump.CMDApp
                 if (Model.Score >= targetScore) break;
 
                 var tempGrayPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Template", "Current.png");
-
                 var tempGrayImg = new Image<Rgb, byte>(tempGrayPath);
-
                 var match = img.MatchTemplate(tempGrayImg, TemplateMatchingType.CcorrNormed);
 
                 double min = 0, max = 0;
@@ -157,11 +156,15 @@ namespace WeChat.AutoJump.CMDApp
                 bitImg.Dispose();
                 img.Dispose();
                 sourceImg.Dispose();
+                sourceGrayImg.Dispose();
+                scoreImg.Dispose();
+                thresImg.Dispose();
+                tempGrayImg.Dispose();
                 match.Dispose();
                 newImg.Dispose();
                 halfImg.Dispose();
 
-                Thread.Sleep(Model.Time + rand.Next(600, 1000));
+                Thread.Sleep(Model.Time + rand.Next(600, 2000));
             }
         }
     }

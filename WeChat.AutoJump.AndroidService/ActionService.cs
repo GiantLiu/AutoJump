@@ -23,13 +23,16 @@ namespace WeChat.AutoJump.AndroidService
             var adbDirectoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "AndoridAdb");
             var adbPath = Path.Combine(adbDirectoryPath, "adb.exe");
 
+            var widthSplit = (int)(img.Width / 2.0);
+            var heightSplit = (int)(img.Height / 2.0);
+
             var point1 = new Point();
-            point1.X = this.Rand.Next(100, img.Width - 200);
-            point1.Y = this.Rand.Next(100, img.Height - 300);
+            point1.X = this.Rand.Next(widthSplit, img.Width - 100);
+            point1.Y = this.Rand.Next(heightSplit, img.Height - 100);
 
             var point2 = new Point();
-            point2.X = this.Rand.Next(100, img.Width - 200);
-            point2.Y = this.Rand.Next(100, img.Height - 300);
+            point2.X = this.Rand.Next(widthSplit, img.Width - 100);
+            point2.Y = this.Rand.Next(heightSplit, img.Height - 100);
 
             using (Process process = new Process())
             {
