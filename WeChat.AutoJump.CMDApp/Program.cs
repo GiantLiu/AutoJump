@@ -222,8 +222,9 @@ namespace WeChat.AutoJump.CMDApp
                 if (!targetInLeft) oldLeftRightX += imgWidthCenter;
                 var oldLeftRightY = leftRightPoint.Y + imgHeightSplit;
                 var oldLeftRight = new Point(oldLeftRightX, oldLeftRightY);
+                var centerPoint = new Point(oldTopPoint.X, oldLeftRight.Y);
 
-                Model.End = oldLeftRight;
+                Model.End = centerPoint;
                 Model.Start = startPoint;
                 Console.WriteLine(JsonConvert.SerializeObject(Model));
                 ActionSvc.Action(Model.Image, Model.Time);

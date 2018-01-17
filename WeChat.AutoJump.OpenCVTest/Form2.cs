@@ -26,7 +26,7 @@ namespace WeChat.AutoJump.OpenCVTest
         public void ProcessImg()
         {
             var imgDic = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
-            var curImgPath = Path.Combine(imgDic, "20180116122141063.png");
+            var curImgPath = Path.Combine(imgDic, "20180117114227698.png");
             Image<Bgr, Byte> img = new Image<Bgr, Byte>(curImgPath);
             Image<Bgr, Byte> sourceImg = new Image<Bgr, Byte>(curImgPath);
 
