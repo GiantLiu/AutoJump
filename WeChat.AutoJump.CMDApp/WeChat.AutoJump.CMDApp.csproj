@@ -83,10 +83,10 @@
     <Content Include="Download\panda128X128.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Template\Current.png">
+    <Content Include="Template\1080_1920.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Template\Gray.png">
+    <Content Include="Template\720_1280.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -10,23 +10,22 @@ namespace WeChat.AutoJump.Domain
     public class AutoCacheModel
     {
         public WidthHeight Image { get; set; }
-        public Point Top { get; set; }
+        public Point End { get; set; }
         public Point Start { get; set; }
         public int Score { get; set; }
         public double JumpWidth
         {
             get
             {
-                var lineWidth = Math.Abs(this.Top.X - this.Start.X);
-                var jumpWidth = lineWidth / Math.Cos(30 * (Math.PI / 180.0));
-                return jumpWidth;
+                double value = Math.Sqrt(Math.Abs(this.Start.X - this.End.X) * Math.Abs(this.Start.X - this.End.X) + Math.Abs(this.Start.Y - this.End.Y) * Math.Abs(this.Start.Y - this.End.Y));
+                return value;
             }
         }
         public int Time
         {
             get
             {
-                var constVal = double.Parse(AppSettingHelper.Get("ConstValue"));
+                var constVal = double.Parse(AppSettingHelper.Get("ConstValue")) / (double)this.Image.Width;
                 return (int)(this.JumpWidth * constVal);
             }
         }

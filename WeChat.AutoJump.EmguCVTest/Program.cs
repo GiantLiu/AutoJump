@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WeChat.AutoJump.OpenCVTest
+namespace WeChat.AutoJump.EmguCVTest
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace WeChat.AutoJump.OpenCVTest
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form2());
+            Application.Run(new Form1());
         }
     }
 }
