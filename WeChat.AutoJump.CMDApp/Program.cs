@@ -22,7 +22,7 @@ namespace WeChat.AutoJump.CMDApp
         static void Main(string[] args)
         {
             var ActionSvc = IocContainer.Resolve<IActionService>();
-            var deviceID = ActionSvc.GetDeciveID();
+            var deviceID = ActionSvc.GetDeviceID();
             if (String.IsNullOrEmpty(deviceID))
             {
                 Console.WriteLine("当前没有检测到手机");

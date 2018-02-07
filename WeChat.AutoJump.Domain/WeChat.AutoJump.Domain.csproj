@@ -45,6 +45,7 @@
     <Compile Include="AppSettingHelper.cs" />
     <Compile Include="AutoCacheModel.cs" />
     <Compile Include="CacheModel.cs" />
+    <Compile Include="JumpDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

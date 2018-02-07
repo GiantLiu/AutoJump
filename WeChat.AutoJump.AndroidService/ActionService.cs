@@ -112,7 +112,7 @@ namespace WeChat.AutoJump.AndroidService
             }
         }
 
-        public string GetDeciveID()
+        public string GetDeviceID()
         {
             var devicesArg = "devices";
             var result = AdbCommand(devicesArg);

@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.AutoJump.EmguCVTest", "WeChat.AutoJump.EmguCVTest\WeChat.AutoJump.EmguCVTest.csproj", "{BBE61B3B-53F1-4420-8E74-C98824B81960}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.AutoJump.App", "WeChat.AutoJump.App\WeChat.AutoJump.App.csproj", "{19EC3B5D-0A1B-4877-A5DB-9390EEB5A054}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,10 @@ Global
 		{BBE61B3B-53F1-4420-8E74-C98824B81960}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBE61B3B-53F1-4420-8E74-C98824B81960}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBE61B3B-53F1-4420-8E74-C98824B81960}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19EC3B5D-0A1B-4877-A5DB-9390EEB5A054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19EC3B5D-0A1B-4877-A5DB-9390EEB5A054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19EC3B5D-0A1B-4877-A5DB-9390EEB5A054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19EC3B5D-0A1B-4877-A5DB-9390EEB5A054}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,7 +10,7 @@ namespace WeChat.AutoJump.IService
 {
     public interface IActionService
     {
-        string GetDeciveID();
+        string GetDeviceID();
         /// <summary>
         /// 拿到屏幕截图
         /// </summary>
