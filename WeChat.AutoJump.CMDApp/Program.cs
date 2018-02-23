@@ -154,6 +154,14 @@ namespace WeChat.AutoJump.CMDApp
                 {
                     for (int x = topPoint.X - 1, y = topPoint.Y - 1; x > 0; x--)
                     {
+                        //如果到了最左边还没有找到就不找了
+                        if (x == 1)
+                        {
+                            leftRightPoint.X = x;
+                            leftRightPoint.Y = y;
+                            break;
+                        }
+
                         var cur = halfImg[y, x];
                         var next = halfImg[y + 1, x];
                         if (Math.Abs(BgrHelp.GetDiff(cur, next)) > 2)
@@ -184,6 +192,14 @@ namespace WeChat.AutoJump.CMDApp
                 {
                     for (int x = topPoint.X + 1, y = topPoint.Y - 1; x < halfImg.Cols; x++)
                     {
+                        //如果到了最右边还没有找到就不找了
+                        if (x == halfImg.Cols - 1)
+                        {
+                            leftRightPoint.X = x;
+                            leftRightPoint.Y = y;
+                            break;
+                        }
+
                         var cur = halfImg[y, x];
                         var next = halfImg[y + 1, x];
                         if (Math.Abs(BgrHelp.GetDiff(cur, next)) > 2)
@@ -251,7 +267,7 @@ namespace WeChat.AutoJump.CMDApp
             var diffR = one.Red - two.Red;
             var diffG = one.Green - two.Green;
             var diffB = one.Blue - two.Blue;
-            return diffR + diffG + diffB;
+            return Math.Abs(diffR) + Math.Abs(diffG) + Math.Abs(diffB);
         }
     }
 }

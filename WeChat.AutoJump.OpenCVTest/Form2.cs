@@ -26,7 +26,7 @@ namespace WeChat.AutoJump.OpenCVTest
         public void ProcessImg()
         {
             var imgDic = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
-            var curImgPath = Path.Combine(imgDic, "20180117114227698.png");
+            var curImgPath = Path.Combine(imgDic, "20180223095101489.png");
             Image<Bgr, Byte> img = new Image<Bgr, Byte>(curImgPath);
             Image<Bgr, Byte> sourceImg = new Image<Bgr, Byte>(curImgPath);
 
@@ -80,7 +80,7 @@ namespace WeChat.AutoJump.OpenCVTest
             CvInvoke.cvSetImageROI(_halfImg, halfRect);
             var halfImg = new Image<Bgr, byte>(imgWidthCenter, newImgHeight);
             CvInvoke.cvCopy(_halfImg, halfImg, IntPtr.Zero);
-            //halfImg.ToBitmap().Save(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "halfImg.png"));
+            halfImg.ToBitmap().Save(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "halfImg.png"));
 
             Point topPoint = new Point();
             for (int i = 0; i < halfImg.Rows; i++)
@@ -135,6 +135,14 @@ namespace WeChat.AutoJump.OpenCVTest
             {
                 for (int x = topPoint.X - 1, y = topPoint.Y - 1; x > 0; x--)
                 {
+                    //如果到了最左边还没有找到就不找了
+                    if (x == 1)
+                    {
+                        leftRightPoint.X = x;
+                        leftRightPoint.Y = y;
+                        break;
+                    }
+
                     var cur = halfImg[y, x];
                     var next = halfImg[y + 1, x];
                     if (Math.Abs(BgrHelp.GetDiff(cur, next)) > 2)
@@ -165,6 +173,13 @@ namespace WeChat.AutoJump.OpenCVTest
             {
                 for (int x = topPoint.X + 1, y = topPoint.Y - 1; x < halfImg.Cols; x++)
                 {
+                    //如果到了最右边还没有找到就不找了
+                    if (x == halfImg.Cols - 1)
+                    {
+                        leftRightPoint.X = x;
+                        leftRightPoint.Y = y;
+                        break;
+                    }
                     var cur = halfImg[y, x];
                     var next = halfImg[y + 1, x];
                     if (Math.Abs(BgrHelp.GetDiff(cur, next)) > 2)
@@ -232,7 +247,7 @@ namespace WeChat.AutoJump.OpenCVTest
             var diffR = one.Red - two.Red;
             var diffG = one.Green - two.Green;
             var diffB = one.Blue - two.Blue;
-            return diffR + diffG + diffB;
+            return Math.Abs(diffR) + Math.Abs(diffG) + Math.Abs(diffB);
         }
     }
 }
